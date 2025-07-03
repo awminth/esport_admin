@@ -1,0 +1,131 @@
+For Edit Admin
+============================
+permission add for q&a / heading ( lote yan kyan)
+
+Database
+=====================
+CREATE TABLE `tblquestion` (
+  `AID` int(11) NOT NULL AUTO_INCREMENT,
+  `Question` text,
+  `ChoiceA` varchar(200) DEFAULT NULL,
+  `ChoiceB` varchar(200) DEFAULT NULL,
+  `ChoiceC` varchar(200) DEFAULT NULL,
+  `ChoiceD` varchar(200) DEFAULT NULL,
+  `CorrectAnswer` varchar(45) DEFAULT NULL,
+  `DT` datetime DEFAULT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `Mark` double DEFAULT '0',
+  PRIMARY KEY (`AID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tblsiteheader` (
+  `AID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(200) DEFAULT NULL,
+  `Description` text,
+  `Img` varchar(45) DEFAULT NULL,
+  `DT` datetime DEFAULT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`AID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `esport`.`tblplayer` 
+ADD COLUMN `secretID` VARCHAR(45) NULL AFTER `DT`;
+
+
+
+
+Coding
+======================
+config.php 
+   $arr_correctanswer = array("A","B","C","D");
+   $secretID = "833633";
+
+function enDate1($date){
+    if($date != NULL && $date != ''){
+        $date = date_create($date);
+        $date = date_format($date, "Y F d");
+        return $date;
+    }else{
+        return "";
+    }
+   
+}
+
+function enTime1($date){
+    if($date != NULL && $date != ''){
+        $date = date_create($date);
+        $date = date_format($date,"H:i A");
+        return $date;
+    }else{
+        return "";
+    }
+   
+}
+
+function customNumberFormat($number, $decimals = 2) {
+    // Format the number with specified decimals
+    $formatted = number_format($number, $decimals, '.', '');
+    // $formatted = number_format($number, $decimals);
+    
+    // Remove trailing zeros and possible decimal point if not needed
+    $formatted = preg_replace('/(\.\d*?)0+$/', '$1', $formatted);
+    $formatted = rtrim($formatted, '.');
+    
+    return $formatted;
+}
+
+
+
+index.php
+
+index_action.php --> fun logout put
+if($action == "logout"){   
+    save_log($_SESSION['esport_admin_username']." Logout လုပ်သွားသည်");
+    unset($_SESSION["esport_admin_userid"]);
+    unset($_SESSION["esport_admin_username"]);
+    unset($_SESSION["esport_admin_usertype"]);
+    unset($_SESSION["esport_admin_userpassword"]);
+    unset($_SESSION["esport_admin_agentid"]);
+    unset($_SESSION["esport_admin_img"]);
+    unset($_SESSION["user_topup_count"]);
+    unset($_SESSION["user_withdraw_count"]);
+    unset($_SESSION["go_sport_permission_aid"]);
+    unset($_SESSION["go_sport_permission_name"]);
+    unset($_SESSION["go_detail_agentid"]);
+    echo 1;
+}
+
+master
+   - header.php
+
+question folder
+
+others folder
+
+agent
+   - agent_rate/action
+
+wallet
+   - playerbalance_action
+
+log
+   - log/log_action
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

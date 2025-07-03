@@ -1,0 +1,78 @@
+<div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-3 pr-0">
+                                                <span><i class="ft-check-circle h4 align-middle danger"></i></span>
+                                            </div>
+                                            <div class="col-9 pl-0">
+                                                Under 2.75
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pull-right">
+                                            <span class="pr-1"><i class="ft-message-square h4 align-middle"></i>
+                                                44</span>
+                                            <span class="pr-1"><i class="ft-corner-up-right h4 align-middle"></i>
+                                                23</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+===========================================
+
+<div id="accordionWrap4" role="tablist" aria-multiselectable="true">
+                    <div class="card accordion collapse-icon accordion-icon-rotate">
+                        <a id="heading41" class="card-header py-1 bg-secondary secondary" data-toggle="collapse"
+                            href="#accordion41" aria-expanded="false" aria-controls="accordion41">
+                            <div class="white">
+                                <div class="row">
+                                    <div class="col-1 pr-0">
+                                        <span><i class="ft-check-circle h4 align-middle success"></i></span>
+                                    </div>
+                                    <div class="col-11 pl-1">
+                                        <span>Under 2.75 </span>
+                                        <span class="text-warning">&nbsp;|&nbsp;</span>
+                                        <span>Venezia vs Fiorentina</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div id="accordion41" role="tabpanel" data-parent="#accordionWrap4" aria-labelledby="heading41"
+                            class="border-success card-collapse collapse" aria-expanded="false">
+                            <div class="card-content">
+                                <div class="card-body p-1">
+                                    TransferCode : 123456 <br>
+                                    BetType : Single <br>
+                                    BetDate : 2023-10-01 12:00:00
+                                </div>
+                            </div>
+                        </div>
+                        <a id="heading42" class="card-header  py-1 bg-secondary secondary" data-toggle="collapse"
+                            href="#accordion42" aria-expanded="false" aria-controls="accordion42">
+                            <div class="white">
+                                <div class="row">
+                                    <div class="col-1 pr-0">
+                                        <span><i class="ft-x-circle h4 align-middle danger"></i></span>
+                                    </div>
+                                    <div class="col-11 pl-1">
+                                        <span>Fiorentina (-1.5)</span>
+                                        <span class="text-warning">&nbsp;|&nbsp;</span>
+                                        <span>Venezia vs Fiorentina</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div id="accordion42" role="tabpanel" data-parent="#accordionWrap4" aria-labelledby="heading42"
+                            class="border-danger card-collapse collapse" aria-expanded="false">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    this is detail
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>

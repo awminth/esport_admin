@@ -1,0 +1,8 @@
+TRUNCATE tblbalanceout;
+TRUNCATE tblbonus;
+TRUNCATE tblcancelbet;
+TRUNCATE tbldeduct;
+TRUNCATE tblgetbetstatus;
+TRUNCATE tbllog;
+TRUNCATE tblrollback;
+TRUNCATE tblsettlebet;
