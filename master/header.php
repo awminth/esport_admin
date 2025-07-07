@@ -394,6 +394,12 @@ if(isset($_SESSION['esport_admin_userid'])){
                         </i><span class="menu-title"
                             data-i18n="Dashboard">Main Header</span></a>
                 </li>
+                <li 
+                    class="<?=(curlink == 'notification.php')?'active':''?>">
+                    <a href="<?=roothtml.'others/notification.php'?>"><i class="la la-bell">
+                        </i><span class="menu-title"
+                            data-i18n="Dashboard">Notification</span></a>
+                </li>
                 <li <?=($P2==1)?'' : 'style="display:none"' ?>
                     class="<?=(curlink == 'log.php')?'active':''?>">
                     <a href="<?=roothtml.'log/log.php'?>"><i class="la la-binoculars">

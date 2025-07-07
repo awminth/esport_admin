@@ -23,7 +23,8 @@ if($action == 'show'){
                     data-aid="'.$row['AID'].'"
                     data-title="'.$row['Title'].'"  
                     data-description="'.$row['Description'].'"
-                    data-img="'.$row['Img'].'">
+                    data-img="'.$row['Img'].'"
+                    data-mdt="'.$row['DT'].'">
                     <img src="'.$img_url.'" alt="" class="card-img-top img-fluid"
                         style="height: 320px; width: 100%; object-fit: cover;">
                 </a>
@@ -59,7 +60,7 @@ if($action == "save"){
     $description = $_POST["description"];
     $oldimg = $_POST["oldimg"];
     $new_filename = "";
-    $dt = date('Y-m-d H:i:s');
+    $mdt = $_POST["mdt"];
     if($_FILES['uploadimg']['name'] != ''){
         $filename = $_FILES['uploadimg']['name'];        
         $extension = pathinfo($filename,PATHINFO_EXTENSION);
@@ -77,7 +78,7 @@ if($action == "save"){
     }
     $sql = "UPDATE tblsiteheader SET Title = ?, Description = ?, Img = ?, DT = ?, UserID = ? WHERE AID = ?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ssssii", $title, $description, $new_filename, $dt, $userid, $aid);
+    $stmt->bind_param("ssssii", $title, $description, $new_filename, $mdt, $userid, $aid);
     if($stmt->execute()){
         save_log($_SESSION['esport_admin_username']." Main Header အား ပြင်ဆင်သည်");
         mysqli_commit($con);

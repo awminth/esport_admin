@@ -48,8 +48,8 @@
                 <div class="modal-body">
                     <div class="media">
                         <a href="javascript: void(0);">
-                            <img src="" id="profileImagePreview"
-                                class="rounded mr-75" alt="profile image" height="64" width="64">
+                            <img src="" id="profileImagePreview" class="rounded mr-75" alt="profile image" height="64"
+                                width="64">
                         </a>
                         <div class="media-body mt-75">
                             <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
@@ -66,8 +66,7 @@
                     <div class="form-group">
                         <div class="controls">
                             <label for="account-old-password">Title</label>
-                            <input type="text" class="form-control" required placeholder="Title"
-                                name="title">
+                            <input type="text" class="form-control" required placeholder="Title" name="title">
                         </div>
                     </div>
                     <div class="form-group">
@@ -75,6 +74,14 @@
                             <label for="account-old-password">Description</label>
                             <textarea class="form-control" rows="5" required placeholder="Description"
                                 name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="controls">
+                            <label for="account-old-password">Match Date</label>
+                            <input type="datetime-local" class="form-control" required placeholder="Match Date" 
+                            name="mdt" step="1">
+
                         </div>
                     </div>
                 </div>
@@ -116,10 +123,13 @@ $(document).ready(function() {
         var title = $(this).data('title');
         var description = $(this).data('description');
         var img = $(this).data('img');
+        var mdt = $(this).data('mdt');
+
         $("[name='aid']").val(aid);
         $("[name='title']").val(title);
         $("[name='description']").val(description);
         $("[name='oldimg']").val(img);
+        $("[name='mdt']").val(mdt);
         var img_url = "<?php echo roothtml; ?>lib/images/" + img;
         $('#profileImagePreview').attr('src', img_url);
         $('#Editmodal').modal('show');
@@ -135,7 +145,7 @@ $(document).ready(function() {
                 $('#profileImagePreview').attr('src', e.target.result);
             }
             reader.readAsDataURL(this.files[0]);
-        }else{
+        } else {
             $("[name='img']").val('');
         }
     });

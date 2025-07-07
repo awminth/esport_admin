@@ -48,9 +48,9 @@ if($action == 'show'){
         <thead>
         <tr> 
             <th width="7%;">No</th>
-            <th>Agent Name</th>
-            <th>Currency</th>  
+            <th>Agent Name</th>  
             <th class="text-center">Player Count</th> 
+            <th class="text-center">Total Top-Up</th> 
             <th class="text-center">Status</th> 
             <th width="15%" class="text-center">Action</th>      
         </tr>
@@ -68,11 +68,13 @@ if($action == 'show'){
                 $statuscolor = "bg-danger";
             }
             $player_cnt = GetInt("SELECT COUNT(AID) FROM tblplayer WHERE AgentID = ?", [$row['AID']]);
+            $total_topup = GetInt("SELECT SUM(b.Amount) FROM tblbalancein b,tblplayer p 
+            WHERE b.PlayerID = p.AID AND p.AgentID=?", [$row["AID"]]);
             $out.="<tr>
                 <td>{$no}</td>
                 <td>{$row["UserName"]}</td>
-                <td>{$row["Currency"]}</td>
                 <td class='text-center text-danger'>".number_format($player_cnt)."</td>
+                <td class='text-center text-danger'>".customNumberFormat($total_topup)."</td>
                 <td class='".$statuscolor." text-white text-center'>{$row["Status"]}</td>
                 <td class='text-center' >
                     <button type='button' class='btn btn-primary btn-sm' 
@@ -379,11 +381,8 @@ if($action == 'show_detail'){
     $a = "";
     if($search != ''){  
         $a .= " AND (UserName like '%$search%') ";
-    }     
-    
-    $sql = "select * from tblplayer 
-    ".$a." 
-    order by AID desc limit {$offset},{$limit_per_page}";
+    } 
+
     $sql = "SELECT * FROM tblplayer 
     WHERE AgentID = '{$_SESSION["go_detail_agentid"]}' ".$a." 
     ORDER BY AID DESC LIMIT {$offset},{$limit_per_page}";
@@ -399,7 +398,7 @@ if($action == 'show_detail'){
             <th width="7%;">No</th>
             <th>Agent Name</th>
             <th>Player Name</th>
-            <th>Player Balance</th>  
+            <th>Player TopUp</th>  
             <th class="text-center">Status</th>    
         </tr>
         </thead>
@@ -407,6 +406,7 @@ if($action == 'show_detail'){
         ';
         $no = (($page - 1) * $limit_per_page);
         while($row = $result->fetch_assoc()){
+            $total_topup = GetInt("SELECT SUM(Amount) FROM tblbalancein WHERE PlayerID = ?", [$row['AID']]);
             $no = $no + 1;
             $statuscolor = "bg-success";
             if($row["Status"] == "Suspend"){
@@ -419,7 +419,7 @@ if($action == 'show_detail'){
                 <td>{$no}</td>
                 <td>{$row["AgentName"]}</td>
                 <td>{$row["UserName"]}</td>
-                <td class='text-danger'>".customNumberFormat($row["Balance"])."</td>
+                <td class='text-danger'>".customNumberFormat($total_topup)."</td>
                 <td class='".$statuscolor." text-white text-center'>{$row["Status"]}</td>
             </tr>";
         }
