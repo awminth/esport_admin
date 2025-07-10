@@ -256,6 +256,9 @@ if($action == 'save'){
     $serverid = date("YmdHis");
     $username=$_POST["username"];
     $password=$_POST["password"];
+    $phoneno=$_POST["phoneno"];
+    $email=$_POST["email"];
+    $nrc=$_POST["nrc"];
     $agentid=$_POST["agentid"];
     $agentname = GetString("SELECT UserName FROM tblagent WHERE AID = ?",[$agentid]);
     $displayname = $_POST["displayname"];
@@ -300,16 +303,54 @@ if($action == 'save'){
     // Close cURL session
     curl_close($ch);
 
+    //ibet789
+    $url2 = "http://apisbjstest_bro777.gksic5ousjiw9pldk3apx6dmbte.com/CreateAccount"; // Replace with your API URL
+
+
+    $data2 = [
+        "secret" => $secretID,
+        "agent" => "ismmc1",
+        "userName" => $username,
+    ];
+
+    // Initialize cURL session
+    $ch2 = curl_init($url2);
+
+    // Set cURL options
+    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch2, CURLOPT_POST, true);
+    
+    // Send JSON data
+    curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($data2));
+    
+    // Set the appropriate Content-Type for JSON
+    curl_setopt($ch2, CURLOPT_HTTPHEADER, [
+        "Content-Type: application/json"
+    ]);
+
+    //for local xampp
+    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false); // Only for dev
+    curl_setopt($ch2, CURLOPT_SSL_VERIFYHOST, false); // Only for dev
+
+    // Execute the request and get the response
+    $response2 = curl_exec($ch2);
+
+    // Decode JSON
+    $data2 = json_decode($response2, true);
+
+    // Close cURL session
+    curl_close($ch2);
+
     // Check for 'msg'
     if (isset($data['error']['msg'])) {
         if($data['error']['msg']=="No Error" && $data['error']['id']==0){
             //insert local database
-            $sql = "insert into tblplayer (CompanyKey,ServerID,UserName,Password,AgentName,AgentID,
-            UserGroup,DisplayName,DT) 
-            values (?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            $sql = "insert into tblplayer (CompanyKey,ServerID,UserName,Password,PhoneNo,
+                Email,NRC,AgentName,AgentID,UserGroup,DisplayName,DT,secretID) 
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("sssssisss", $companykey, $serverid, $username, $password, $agentname, $agentid, 
-            $usergp, $displayname, $dt);
+            $stmt->bind_param("ssssssssissss",$companykey, $serverid, $username, $password, $phoneno,
+                $email, $nrc, $agentname, $agentid, $usergp, $displayname, $dt, $secretID);
             if($stmt->execute()){
                 save_log($_SESSION["esport_admin_username"]." သည် player (".$username.") အား အသစ်သွင်းသွားသည်။");
                 echo 1;

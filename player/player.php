@@ -118,6 +118,21 @@
                             placeholder="Enter password">
                     </div>
                     <div class="form-group">
+                        <label for="usr">PhoneNo</label>
+                        <input type="text" required class="form-control" name="phoneno" 
+                            placeholder="Enter PhoneNo">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Email</label>
+                        <input type="email" required class="form-control" name="email" 
+                            placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">NRC</label>
+                        <input type="text" required class="form-control" name="nrc" 
+                            placeholder="Enter NRC No">
+                    </div>
+                    <div class="form-group">
                         <label for="usr">Choose Agent</label>
                         <select required class=" form-control select2" name="agentid">
                             <option value="">Choose Agent</option>

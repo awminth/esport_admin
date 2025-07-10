@@ -40,6 +40,7 @@ $arr_usertype = array("Admin","Agent");
 $arr_correctanswer = array("A","B","C","D");
 $arr_currency = array("MMK");
 $companykey = "E258AF866BB444E6A116C52B24DAB7C5";
+$secretID = "833633";
 
 
 function load_player(){
