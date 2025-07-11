@@ -261,6 +261,7 @@ if($action == 'save'){
     $nrc=$_POST["nrc"];
     $agentid=$_POST["agentid"];
     $agentname = GetString("SELECT UserName FROM tblagent WHERE AID = ?",[$agentid]);
+    $ibagent = "ismmc1";
     $displayname = $_POST["displayname"];
     $dt = (new DateTime())->format('Y-m-d H:i:s');
     //Send data to API
@@ -346,11 +347,11 @@ if($action == 'save'){
         if($data['error']['msg']=="No Error" && $data['error']['id']==0){
             //insert local database
             $sql = "insert into tblplayer (CompanyKey,ServerID,UserName,Password,PhoneNo,
-                Email,NRC,AgentName,AgentID,UserGroup,DisplayName,DT,secretID) 
-                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                Email,NRC,AgentName,IbAgent,AgentID,UserGroup,DisplayName,DT,secretID) 
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("ssssssssissss",$companykey, $serverid, $username, $password, $phoneno,
-                $email, $nrc, $agentname, $agentid, $usergp, $displayname, $dt, $secretID);
+            $stmt->bind_param("sssssssssissss",$companykey, $serverid, $username, $password, $phoneno,
+                $email, $nrc, $agentname, $ibagent, $agentid, $usergp, $displayname, $dt, $secretID);
             if($stmt->execute()){
                 save_log($_SESSION["esport_admin_username"]." သည် player (".$username.") အား အသစ်သွင်းသွားသည်။");
                 echo 1;
